@@ -2294,6 +2294,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e7c5cedc30da3a610cac6b4ba17597bdf7152cf974e8aab3afb3d54455e371c8"
 
 [[package]]
+name = "incomedivider-desktop"
+version = "0.1.0"
+dependencies = [
+ "slint",
+ "slint-build",
+]
+
+[[package]]
 name = "indexmap"
 version = "2.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4084,14 +4092,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "spin_on",
-]
-
-[[package]]
-name = "slint-rust-template"
-version = "0.1.0"
-dependencies = [
- "slint",
- "slint-build",
 ]
 
 [[package]]
