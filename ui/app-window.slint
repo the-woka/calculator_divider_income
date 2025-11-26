@@ -1,0 +1,55 @@
+import { Button, VerticalBox, LineEdit } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+
+    in property <string> results: "";
+    callback divide-income(string);
+
+    background: #313e50;
+    GridLayout {
+        padding: 20px;
+        spacing: 20px;
+        Row {
+            Text {
+                text: "Income Calculator";
+                horizontal-alignment: center;
+                font-size: 24px;
+                font-weight: 900;
+                color: white;
+            }
+        }
+
+        Row {
+            income := LineEdit {
+                horizontal-alignment: center;
+                placeholder-text: "Enter your number (IDR)";
+                font-size: 16px;
+                height: 35px;
+            }
+        }
+
+        Row {
+            Button {
+                text: "Calculate";
+                primary: true;
+                height: 35px;
+                clicked => {divide_income(income.text)};
+            }
+        }
+
+        Row {
+            VerticalBox {
+                Rectangle {
+                    height: 100px;
+                    background: #f2f2f2;
+                    Text {
+                        color: black;
+                        font-size: 16px;
+                        font-weight: 500;
+                        text: root.results;
+                    }
+                }
+            }
+        }
+    }
+}
