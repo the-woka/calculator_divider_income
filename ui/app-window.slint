@@ -1,9 +1,16 @@
-import { Button, VerticalBox, LineEdit } from "std-widgets.slint";
+import { Button, VerticalBox, LineEdit, ScrollView } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
 
     in property <string> results: "";
     in-out property <bool> opencurtain;
+    in-out property <[{text: string, value: int}]> entries: [];
+    in-out property <int> total: 0;
+
+    callback add-entry();
+    callback remove-entry(int);
+    callback update-value(string, int);
+    callback update-text(string, int);
     callback divide-income(string);
 
     background: #313e50;
@@ -26,6 +33,59 @@ export component AppWindow inherits Window {
                 placeholder-text: "Enter your number (IDR)";
                 font-size: 16px;
                 height: 35px;
+            }
+        }
+
+        Row {
+            Text {
+                text: "Divide the Income";
+                horizontal-alignment: center;
+                font-size: 16px;
+                font-weight: 800;
+                color: white;
+            }
+        }
+
+        Row {
+            VerticalLayout {
+                spacing: 10px;
+                ScrollView {
+                    viewport-height: 300px;
+                    VerticalLayout {
+                        spacing: 10px;
+                        for entry[idx] in entries : Rectangle {
+                            height: 70px;
+                            background: #f2f2f2;
+                            border-radius: 5px;
+                        }
+                        HorizontalLayout {
+                            padding: 10px;
+                            spacing: 8px;
+
+                            LineEdit {
+                                text: entry.text;
+                                horizontal-alignment: left;
+                                placeholder-text: "Description";
+                                font-size: 14px;
+                                height: 35px;
+                                edited(new-text) => {
+                                    root.update-text(idx, new-text);
+                                }
+                            }
+
+                            LineEdit {
+                                text: entry.value;
+                                horizontal-alignment: center;
+                                placeholder-text: "Percentage";
+                                font-size: 14px;
+                                height: 35px;
+                                edited(new-text) => {
+                                    root.update-value(idx, new-value);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
